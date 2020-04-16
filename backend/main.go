@@ -26,10 +26,24 @@ func main() {
 	router := gin.Default()
 
 	router.GET("/todos", HandleGet)
+	router.POST("/todos", HandleNew)
 
 	router.Run(":8080")
 }
 
 func HandleGet(c *gin.Context) {
 	c.JSON(http.StatusOK, todos)
+}
+
+func HandleNew(c *gin.Context) {
+	todo := Todo{}
+	if err := c.ShouldBindJSON(&todo); err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
+	todo.Id = count
+	count++
+
+	todos = append(todos, todo)
+	c.Status(http.StatusCreated)
 }
