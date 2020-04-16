@@ -1,8 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,6 +29,7 @@ func main() {
 
 	router.GET("/todos", HandleGet)
 	router.POST("/todos", HandleNew)
+	router.DELETE("/todo/:id", HandleDelete)
 
 	router.Run(":8080")
 }
@@ -46,4 +49,38 @@ func HandleNew(c *gin.Context) {
 
 	todos = append(todos, todo)
 	c.Status(http.StatusCreated)
+}
+
+func HandleDelete(c *gin.Context) {
+	param, _ := c.Params.Get("id")
+	id, err := strconv.Atoi(param)
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	newTodos, err := delete(todos, id)
+	if err != nil {
+		c.AbortWithError(http.StatusNotFound, err)
+		return
+	}
+
+	todos = newTodos
+	c.Status(http.StatusNoContent)
+}
+
+func delete(ts []Todo, id int) ([]Todo, error) {
+	newTodos := make([]Todo, 0, len(ts))
+	for _, v := range ts {
+		if v.Id != id {
+			newTodos = append(newTodos, v)
+		}
+	}
+
+	if len(newTodos) == len(ts) {
+		return nil, errors.New(fmt.Sprintf("Element with id: %d not found", id))
+	}
+
+	return newTodos, nil
 }
