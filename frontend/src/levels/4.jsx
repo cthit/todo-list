@@ -24,6 +24,12 @@ const Four = () => {
         let temp = [...todos];
         temp[index].done = !temp[index].done;
         setTodos(temp);
+        Axios.put("/todo", temp[index])
+            .then(() => console.log("Updated todo"))
+            .catch(err => {
+                console.log("Failed to update todo");
+                console.log(err);
+            });
     };
 
     return (
