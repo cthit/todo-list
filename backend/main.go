@@ -30,6 +30,7 @@ func main() {
 	router.GET("/todos", HandleGet)
 	router.POST("/todos", HandleNew)
 	router.DELETE("/todo/:id", HandleDelete)
+	router.PUT("/todo", HandleChange)
 
 	router.Run(":8080")
 }
@@ -68,6 +69,32 @@ func HandleDelete(c *gin.Context) {
 
 	todos = newTodos
 	c.Status(http.StatusNoContent)
+}
+
+func HandleChange(c *gin.Context) {
+	todo := Todo{}
+	if err := c.BindJSON(&todo); err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+		return
+	}
+
+	if err := change(todos, todo); err != nil {
+		c.AbortWithError(http.StatusNotFound, err)
+		return
+	}
+
+	c.Status(http.StatusOK)
+}
+
+func change(ts []Todo, t Todo) error {
+	for k, v := range ts {
+		if v.Id == t.Id {
+			ts[k] = t
+			return nil
+		}
+	}
+
+	return errors.New(fmt.Sprintf("Element not found with id: %d", t.Id))
 }
 
 func delete(ts []Todo, id int) ([]Todo, error) {
