@@ -34,4 +34,18 @@ public class TodoController {
         todos.add(todo);
         response.setStatus(HttpServletResponse.SC_CREATED);
     }
+
+    @DeleteMapping("/todo/{id}")
+    public void deleteTodo(@PathVariable(name = "id") int id, HttpServletResponse response){
+        System.out.println(id);
+        for(Todo t : todos){
+            if(t.id == id){
+                todos.remove(t);
+                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                return;
+            }
+        }
+
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
 }
