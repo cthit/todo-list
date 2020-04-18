@@ -37,4 +37,16 @@ app.delete("/todo/:id", (req, res) => {
     res.status(204).end();
 });
 
+app.put("/todo", (req, res) => {
+    var todo = todos.find(e => e.id == req.body.id);
+    if (!todo) {
+        res.status(404).end();
+        return;
+    }
+
+    todo.done = req.body.done;
+    todo.title = req.body.title;
+    res.status(204).end();
+});
+
 app.listen(8080);
