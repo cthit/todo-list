@@ -2,7 +2,7 @@
 
 This repository contains examples of implementing a web application with a React frontend with a running backend. There are several basic implementations of the backend using [Go](https://golang.org/doc/), [NodeJs](https://nodejs.org/en/about/) (Javascript) and [Sprint Boot](https://spring.io/projects/spring-boot) (Java).
 \
-All backend applications will run on `localhost:8080`, so only one backend kan run at a time.
+All backend applications will run on `localhost:8080`, so only one backend can run at a time.
 
 ## Software
 
