@@ -11,4 +11,9 @@ public class Todo {
     String title;
     @JsonProperty("done")
     boolean done;
+
+    void set(Todo todo){
+        id = todo.id;
+        title = todo.title;
+    }
 }
