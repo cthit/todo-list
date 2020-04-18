@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 app = express();
 app.use(bodyParser.json());
 
-var count = 0;
-const todos = [
+var count = 1;
+var todos = [
     {
         id: 0,
         title: "Hello",
@@ -25,6 +25,16 @@ app.post("/todos", (req, res) => {
     todos.push(todo);
 
     res.status(201).end();
+});
+
+app.delete("/todo/:id", (req, res) => {
+    if (!todos.find(e => e.id == req.params.id)) {
+        res.status(404).end();
+        return;
+    }
+
+    todos = todos.filter(e => e.id != req.params.id);
+    res.status(204).end();
 });
 
 app.listen(8080);
