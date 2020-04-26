@@ -1,4 +1,4 @@
-module chalmers.it/todo-list
+module chalmers.it/api/todo-list
 
 go 1.14
 

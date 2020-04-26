@@ -7,8 +7,35 @@ import {
 import ClearIcon from "@material-ui/icons/Clear";
 import CheckIcon from "@material-ui/icons/Check";
 import Axios from "axios";
+import PropTypes from "prop-types";
 
-const Four = () => {
+const Todo = (todo, onClick) => {
+    return (
+        <DigitDesign.Card key={todo.id} onClick={onClick}>
+            <DigitDesign.CardBody>
+                <DigitLayout.Row>
+                    {todo.done ? (
+                        <CheckIcon style={{ color: "green" }} />
+                    ) : (
+                        <ClearIcon style={{ color: "red" }} />
+                    )}
+                    <DigitText.Heading6 text={todo.title} />
+                </DigitLayout.Row>
+            </DigitDesign.CardBody>
+        </DigitDesign.Card>
+    );
+};
+
+Todo.propTypes = {
+    todo: PropTypes.shape({
+        id: PropTypes.int.isRequired,
+        done: PropTypes.bool.isRequired,
+        title: PropTypes.title.isRequired,
+    }),
+    onClick: PropTypes.func.isRequired,
+};
+
+const Five = () => {
     const [todos, setTodos] = useState([]);
 
     useEffect(() => {
@@ -36,21 +63,10 @@ const Four = () => {
         <>
             <DigitText.Heading2 text="Todo List" />
             {todos.map((e, index) => (
-                <DigitDesign.Card key={e.id} onClick={() => toggleTodo(index)}>
-                    <DigitDesign.CardBody>
-                        <DigitLayout.Row>
-                            {e.done ? (
-                                <CheckIcon style={{ color: "green" }} />
-                            ) : (
-                                <ClearIcon style={{ color: "red" }} />
-                            )}
-                            <DigitText.Heading6 text={e.title} />
-                        </DigitLayout.Row>
-                    </DigitDesign.CardBody>
-                </DigitDesign.Card>
+                <Todo todo={e} onClick={() => toggleTodo(index)} />
             ))}
         </>
     );
 };
 
-export default Four;
+export default Five;

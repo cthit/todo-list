@@ -4,7 +4,7 @@ import {
     DigitText,
     DigitLayout,
 } from "@cthit/react-digit-components";
-import { todos } from "./todos";
+import { todos } from "./api/todos";
 import ClearIcon from "@material-ui/icons/Clear";
 import CheckIcon from "@material-ui/icons/Check";
 import { useState } from "react";

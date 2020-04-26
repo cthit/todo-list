@@ -27,10 +27,10 @@ func main() {
 
 	router := gin.Default()
 
-	router.GET("/todos", HandleGet)
-	router.POST("/todos", HandleNew)
-	router.DELETE("/todo/:id", HandleDelete)
-	router.PUT("/todo", HandleChange)
+	router.GET("/api/todos", HandleGet)
+	router.POST("/api/todos", HandleNew)
+	router.DELETE("/api/todo/:id", HandleDelete)
+	router.PUT("/api/todo", HandleChange)
 
 	router.Run(":8080")
 }

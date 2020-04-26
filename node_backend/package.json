@@ -14,12 +14,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/cthit/todo-list.git"
+        "url": "git+https://github.com/cthit/api/todo-list.git"
     },
     "author": "molleer",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/cthit/todo-list/issues"
+        "url": "https://github.com/cthit/api/todo-list/issues"
     },
-    "homepage": "https://github.com/cthit/todo-list#readme"
+    "homepage": "https://github.com/cthit/api/todo-list#readme"
 }

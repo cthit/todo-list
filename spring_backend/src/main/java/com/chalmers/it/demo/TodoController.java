@@ -23,19 +23,19 @@ public class TodoController {
         todos.add(todo);
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/api/todos")
     public List<Todo> getTodos(){
         return todos;
     }
 
-    @PostMapping("/todos")
+    @PostMapping("/api/todos")
     public void newTodo(@RequestBody Todo todo, HttpServletResponse response){
         todo.id = count++;
         todos.add(todo);
         response.setStatus(HttpServletResponse.SC_CREATED);
     }
 
-    @DeleteMapping("/todo/{id}")
+    @DeleteMapping("/api/todo/{id}")
     public void deleteTodo(@PathVariable(name = "id") int id, HttpServletResponse response){
         for(Todo t : todos){
             if(t.id == id){
@@ -48,7 +48,7 @@ public class TodoController {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
-    @PutMapping("/todo")
+    @PutMapping("/api/todo")
     public void changeTodo(@RequestBody Todo todo, HttpServletResponse response) {
         for(Todo t : todos){
             if(t.id == todo.id){

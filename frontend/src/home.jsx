@@ -3,7 +3,7 @@ import { DigitText } from "@cthit/react-digit-components";
 import { Link } from "react-router-dom";
 const Home = () => {
     let levels = [];
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 1; i <= 5; i++) {
         levels.push({
             title: `Level ${i}`,
             link: `/level/${i}`,

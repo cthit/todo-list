@@ -13,11 +13,11 @@ var todos = [
     },
 ];
 
-app.get("/todos", (req, res) => {
+app.get("/api/todos", (req, res) => {
     res.json(todos);
 });
 
-app.post("/todos", (req, res) => {
+app.post("/api/todos", (req, res) => {
     var todo = {};
     todo.title = req.body.title;
     todo.done = req.body.done;
@@ -27,7 +27,7 @@ app.post("/todos", (req, res) => {
     res.status(201).end();
 });
 
-app.delete("/todo/:id", (req, res) => {
+app.delete("/api/todo/:id", (req, res) => {
     if (!todos.find(e => e.id == req.params.id)) {
         res.status(404).end();
         return;
@@ -37,7 +37,7 @@ app.delete("/todo/:id", (req, res) => {
     res.status(204).end();
 });
 
-app.put("/todo", (req, res) => {
+app.put("/api/todo", (req, res) => {
     var todo = todos.find(e => e.id == req.body.id);
     if (!todo) {
         res.status(404).end();
