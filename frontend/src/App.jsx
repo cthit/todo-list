@@ -2,9 +2,9 @@ import React from "react";
 import { DigitProviders } from "@cthit/react-digit-components";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { Route } from "react-router";
-import { One, Two, Three, Four } from "./levels";
 
-const Home = () => <div>Home</div>;
+import { One, Two, Three, Four } from "./levels";
+import Home from "./home";
 
 const App = () => (
     <DigitProviders>
